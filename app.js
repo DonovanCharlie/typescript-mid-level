@@ -67,3 +67,26 @@ function isVariation(p) {
 console.log(isVariation(materialVariation));
 console.log(isVariation(colorVariation));
 console.log(isVariation(sizeVariation));
+function isString(input) {
+    if (typeof input === 'string') {
+        return true;
+    }
+    else
+        return false;
+}
+function isCategory(input) {
+    if (typeof input === 'object') {
+        return true;
+    }
+    else
+        return false;
+}
+function processData(input) {
+    if (isCategory(input)) {
+        return input.name;
+    }
+    else if (isString(input)) {
+        return input;
+    }
+    return null;
+}
