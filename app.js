@@ -1,3 +1,4 @@
+//------------------ Generics --------------------------
 function transformArray(arr, callback) {
     return arr.map(callback);
 }
@@ -26,3 +27,43 @@ var changePassword = transformArray(usersArray, function (user) {
     return user;
 });
 console.log(changePassword);
+// Example usage
+var product = {
+    name: 'T-Shirt',
+    price: 29.99,
+    description: 'A comfortable and stylish T-shirt.',
+};
+var sizeVariation = {
+    name: 'T-Shirt',
+    price: 34.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'size',
+    size: 'L',
+};
+var colorVariation = {
+    name: 'T-Shirt',
+    price: 39.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'color',
+    color: 'blue',
+};
+var materialVariation = {
+    name: 'T-Shirt',
+    price: 44.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'material',
+    material: 'cotton',
+};
+function isVariation(p) {
+    switch (p.variationType) {
+        case "material":
+            return "Variation based on material";
+        case "color":
+            return "Variation based on color";
+        case "size":
+            return "Variation based on size";
+    }
+}
+console.log(isVariation(materialVariation));
+console.log(isVariation(colorVariation));
+console.log(isVariation(sizeVariation));

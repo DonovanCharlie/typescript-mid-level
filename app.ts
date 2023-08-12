@@ -1,3 +1,6 @@
+//------------------ Generics --------------------------
+
+
 function transformArray<T>(arr: T[], callback: (element: T) => T): T[] {
     return arr.map(callback);
 }
@@ -37,3 +40,104 @@ const changePassword = transformArray(usersArray, (user: User) => {
 });
 console.log(changePassword); 
 
+//------------------ Union and Intersection Type --------------------------
+
+interface BaseProduct {
+    name: string;
+    price: number;
+    description: string;
+}
+
+interface SizeVariation extends BaseProduct {
+    variationType: 'size';
+    size: string;
+}
+
+interface ColorVariation extends BaseProduct {
+    variationType: 'color';
+    color: string;
+}
+
+interface MaterialVariation extends BaseProduct {
+    variationType: 'material';
+    material: string;
+}
+
+type Product = BaseProduct | SizeVariation | ColorVariation | MaterialVariation;
+
+// Example usage
+const product: Product = {
+    name: 'T-Shirt',
+    price: 29.99,
+    description: 'A comfortable and stylish T-shirt.',
+};
+
+const sizeVariation: Product = {
+    name: 'T-Shirt',
+    price: 34.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'size',
+    size: 'L',
+};
+
+const colorVariation: Product = {
+    name: 'T-Shirt',
+    price: 39.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'color',
+    color: 'blue',
+};
+
+const materialVariation: Product = {
+    name: 'T-Shirt',
+    price: 44.99,
+    description: 'A comfortable and stylish T-shirt.',
+    variationType: 'material',
+    material: 'cotton',
+};
+
+function isVariation(p: Product) {
+  switch (p.variationType) {
+    case "material":
+      return "Variation based on material";
+    case "color":
+      return `Variation based on color`;
+    case "size":
+      return "Variation based on size";
+  }
+}
+
+console.log(isVariation(materialVariation));
+console.log(isVariation(colorVariation));
+console.log(isVariation(sizeVariation));
+
+
+//---------------- Type Guards ----------------
+
+interface Category {
+  name: string;
+}
+
+interface Product {
+  category: Category;
+}
+
+function isString(input){
+    if (typeof input === 'string') {
+        return true;
+    } else return false;
+}
+function isCategory(input){
+   if (typeof input === 'object') {
+       return true;
+    }else return false;
+}
+
+function processData(input: Category | string | null): string | null {
+  if (isCategory(input)) {
+    return input.name;
+  } else if (isString(input)) {
+    return input;
+  }
+  return null;
+}
